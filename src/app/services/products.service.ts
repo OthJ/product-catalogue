@@ -10,7 +10,8 @@ export class ProductService{
     }
     getAllProducts() :Observable<Product[]>{
         let host = environment.host;
-        return this.http.get<Product[]>(environment+"/products");
+        console.log("i call the service function and this is the url" + host);
+        return this.http.get<Product[]>(host+"/products");
     }
 
     getSelectedProducts() :Observable<Product[]>{

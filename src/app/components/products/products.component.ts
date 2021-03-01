@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Product } from 'src/app/model/product.model';
 import { ProductService } from 'src/app/services/products.service';
 import {AppDataState, DataStateEnum} from 'src/app/state/product.state'
+import { map,startWith,catchError } from 'rxjs/operators'
 
 @Component({
   selector: 'app-products',
@@ -19,9 +20,9 @@ export class ProductsComponent implements OnInit {
 
   onGetAllProducts(){
     this.products$ = this.productService.getAllProducts().pipe(
-      map(data=>({dataStat : DataStateEnum.LOADED,data:data})),
-      startWith({dataStat: DataStateEnum.LOADING}),
-      catchError(err=>of({dataStat :  DataStateEnum.ERROR,errorMessage:err.message}))
+      map(data=>({dataState:DataStateEnum.LOADED,data:data})),
+      startWith({dataState:DataStateEnum.LOADING}),
+      catchError(err=>of({dataState:DataStateEnum.ERROR,errorMessage:err.message}))
 
     );
   }
