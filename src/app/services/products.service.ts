@@ -16,11 +16,16 @@ export class ProductService{
 
     getSelectedProducts() :Observable<Product[]>{
         let host = environment.host;
-        return this.http.get<Product[]>(environment+"/products?selected=true");
+        return this.http.get<Product[]>(host+"/products?selected=true");
     }
     getAvailableProducts() :Observable<Product[]>{
         let host = environment.host;
-        return this.http.get<Product[]>(environment+"/products?available=true");
+        return this.http.get<Product[]>(host+"/products?available=true");
+    }
+
+    SearchProducts(keyword : string):Observable<Product[]>{
+        let host = environment.host;
+        return this.http.get<Product[]>(host+"/products?name_like="+keyword);
     }
 
 }

@@ -12,7 +12,9 @@ import { map,startWith,catchError } from 'rxjs/operators'
 })
 export class ProductsComponent implements OnInit {
 
+  
   products$:Observable<AppDataState<Product[]>>|null = null;
+  readonly DataStateEnum = DataStateEnum;
 
   constructor(private productService: ProductService) { 
 
@@ -26,7 +28,38 @@ export class ProductsComponent implements OnInit {
 
     );
   }
+
+  onGetSelectedProducts(){
+    this.products$ = this.productService.getSelectedProducts().pipe(
+      map(data=>({dataState:DataStateEnum.LOADED,data:data})),
+      startWith({dataState:DataStateEnum.LOADING}),
+      catchError(err=>of({dataState:DataStateEnum.ERROR,errorMessage:err.message}))
+
+    );
+  }
+
+  onGetAvailableProducts(){
+    this.products$ = this.productService.getAvailableProducts().pipe(
+      map(data=>({dataState:DataStateEnum.LOADED,data:data})),
+      startWith({dataState:DataStateEnum.LOADING}),
+      catchError(err=>of({dataState:DataStateEnum.ERROR,errorMessage:err.message}))
+
+    );
+  }
+
+  onSearch(dataForm : any){
+
+    this.products$ = this.productService.SearchProducts(dataForm.keyword).pipe(
+      map(data=>({dataState:DataStateEnum.LOADED,data:data})),
+      startWith({dataState:DataStateEnum.LOADING}),
+      catchError(err=>of({dataState:DataStateEnum.ERROR,errorMessage:err.message}))
+
+    );
+
+  }
   ngOnInit(): void {
+    
+
   }
 
 }
