@@ -57,6 +57,23 @@ export class ProductsComponent implements OnInit {
     );
 
   }
+
+  onSelect(p:Product){
+    this.productService.SelectProducts(p)
+    .subscribe(data=>{
+      p.selected = data.selected;
+    });
+
+  }
+
+  onDelete(p:Product){
+    let v = confirm("you sure you want to delete this product ?");
+    if(v == true)
+    this.productService.DeleteProduct(p)
+    .subscribe(data=>{
+      this.onGetAllProducts();
+    });
+  }
   ngOnInit(): void {
     
 
