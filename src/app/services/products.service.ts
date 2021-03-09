@@ -34,10 +34,25 @@ export class ProductService{
         return this.http.put<Product>(host+"/products/"+product.id,product);
     }
 
+
+    save(product : Product):Observable<Product>{
+        let host = environment.host;
+        return this.http.post<Product>(host+"/products",product);
+    }
+
     DeleteProduct(product : Product):Observable<void>{
         let host = environment.host;
         product.selected = !product.selected;
         return this.http.delete<void>(host+"/products/"+product.id);
+    }
+    getProduct(id : number):Observable<Product>{
+        let host = environment.host;
+        return this.http.get<Product>(host+"/products/"+id);
+    }
+
+    updateProduct(p : Product):Observable<Product>{
+        let host = environment.host;
+        return this.http.put<Product>(host+"/products/"+p.id,p);
     }
 
 }

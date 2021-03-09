@@ -7,13 +7,17 @@ import { HomeComponent } from './components/home/home.component';
 import { RouterModule,Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductAddComponent } from './components/product-add/product-add.component';
+import { ProductEditComponent } from './components/product-edit/product-edit.component';
 
 
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  {path: 'products', component: ProductsComponent }
+  {path: 'products', component: ProductsComponent },
+  {path: 'newProduct', component: ProductAddComponent },
+  {path: 'editProduct/:id', component: ProductEditComponent }
 ];
 
 
@@ -23,6 +27,8 @@ const routes: Routes = [
     NavBarComponent,
     ProductsComponent,
     HomeComponent,
+    ProductAddComponent,
+    ProductEditComponent,
     
   ],
   imports: [

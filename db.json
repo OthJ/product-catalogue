@@ -9,19 +9,11 @@
       "available": true
     },
     {
-      "id": 2,
-      "name": "printer",
-      "price": 300,
-      "quantity": 100,
-      "selected": false,
-      "available": true
-    },
-    {
       "id": 3,
       "name": "SmartPhone",
       "price": 1200,
-      "quantity": 600,
-      "selected": false,
+      "quantity": "6",
+      "selected": true,
       "available": true
     }
   ]
